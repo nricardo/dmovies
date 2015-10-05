@@ -1,0 +1,33 @@
+{
+  "name": "dmovies",
+  "version": "1.0.0",
+  "description": "A movie organizer for KODI (aka XBMC).",
+  "main": "index.js",
+  "scripts": {
+    "dev": "webpack-dev-server -w --content-base public/"
+  },
+  "author": "Nelson Ricardo <nelson.s.ricardo@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nricardo/dmovies"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "angular": "^1.4.6",
+    "angular-ui-router": "^0.2.15",
+    "angular2-now": "^0.3.8",
+    "babel-core": "^5.8.25",
+    "babel-loader": "^5.3.2",
+    "bootstrap-sass": "^3.3.5",
+    "css-loader": "^0.19.0",
+    "file-loader": "^0.8.4",
+    "html-loader": "^0.3.0",
+    "json-loader": "^0.5.3",
+    "node-sass": "^3.3.3",
+    "sass-loader": "^3.0.0",
+    "style-loader": "^0.12.4",
+    "url-loader": "^0.5.6",
+    "webpack": "^1.12.2",
+    "webpack-dev-server": "^1.12.0"
+  }
+}

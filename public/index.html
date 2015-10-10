@@ -4,16 +4,24 @@
   <base href="/">
   <meta charset="UTF-8">
 	<title>Webpack + AngularJS :D</title>
+
+  <link href='http://fonts.googleapis.com/css?family=Lobster|Open+Sans' rel='stylesheet' type='text/css'>
+  <link rel="dns-prefetch" href="//fonts.googleapis.com" />
+
   <link rel="stylesheet" href="css/slate.min.css">
 </head>
 <body>
-  <header id="header">HEADER</header>
+  <header>
+    <div class="container">I'm the Header!</div>
+  </header>
 
-  <main id="content" class="container">
+  <main class="container">
     <ui-view></ui-view>
   </main>
 
-  <footer id="footer">FOOTER</footer>
+  <footer>
+    <div class="container">Nelson Ricardo &copy; 2015</div>
+  </footer>
 
 	<script type="text/javascript" src="js/app.js"></script>
 </body>

@@ -14,5 +14,10 @@ import home from './modules/home';
 
 // bootstrap the app
 angular.element(document).ready(function () {
-  angular.bootstrap(document, [angular.module('app', [uirouter, home]).config(routing).name]);
+  angular.bootstrap(
+    document,
+    [angular.module('app', [
+      home])
+    .config(routing)
+    .name]);
 });

@@ -1,20 +1,32 @@
-//$icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
-//@import '~bootstrap-sass/assets/stylesheets/bootstrap';
-
-* {
-  margin: 0;
-  padding: 0;
-}
+// ===== Generic application styles ===========================================
 
 body {
-  background-color: lightgray;
+  background-image: url(../public/images/bg.png);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Open Sans', sans-serif;
+  min-height: 100vh;
 }
 
 header {
-  background-color: #ccc;
-  color: lightlime;
+  background-color: #252525;
   height: 50px;
+  margin-bottom: 20px;
   padding: 10px;
 }
 
-footer {}
+main {
+  flex: 1;
+}
+
+footer {
+  background-color: #4c4c4c;
+  color: #aaa;
+  height: 40px;
+  display: flex;
+
+  .container {
+    margin: auto;
+  }
+}

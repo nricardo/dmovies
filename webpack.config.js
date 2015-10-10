@@ -39,10 +39,15 @@ module.exports = {
 				exclude: /node_modules/
 			},
 
+			// process SASS/SCSS files and loads them
 			{
 	      test: /\.scss$/,
 				loaders: ['style', 'css', 'sass']
 			},
+
+			// loads up images
+			{ test: /\.jpg$/,	loader: 'file' },
+			{ test: /\.png$/,	loader: 'url?limit=8192' },
 
 	    // needed by bootstrap's
 	    { test: /\.eot$/,    loader: 'file' },

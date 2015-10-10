@@ -4,6 +4,7 @@
   "description": "A movie organizer for KODI (aka XBMC).",
   "main": "index.js",
   "scripts": {
+    "predev": "npm install",
     "dev": "webpack-dev-server -w --content-base public/"
   },
   "author": "Nelson Ricardo <nelson.s.ricardo@gmail.com>",

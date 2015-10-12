@@ -1,0 +1,28 @@
+<div class="page_header">
+  <h1>Movies <small>Find a movie...</small></h1>
+</div>
+
+<pre>{{ controller | json }}</pre>
+
+<div class="row">
+  <div class="col-xs-12 col-sm-8 col-sm-6">
+
+    <form ng-submit="search()">
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="Search by title..." ng-model="controller.query">
+        <span class="input-group-btn">
+          <button class="btn btn-default" type="button" ng-disabled="!controller.query"><i class="fa fa-search"></i> Search</button>
+        </span>
+      </div>
+    </form>
+
+  </div>
+</div>
+
+<hr>
+
+<div class="row">
+  <div class="col-xs-12 col-sm-8 col-sm-6">
+    <p>Search results...</p>
+  </div>
+</div>

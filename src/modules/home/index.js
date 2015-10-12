@@ -1,10 +1,12 @@
-import angular from 'angular';
-import uirouter from 'angular-ui-router';
+import {Controller, Inject, SetModule} from 'angular2-now';
 
-import routing from './home.routes';
-import HomeController from './home.controller';
+SetModule('dMovies')
+@State({name: 'home'})
+@Controller({name: 'home'})
 
-export default angular.module('app.home', [uirouter])
-  .config(routing)
-  .controller('HomeController', HomeController)
-  .name;
+class Home
+{
+  constructor () {}
+}
+
+export default 'Home';

@@ -1,11 +1,12 @@
-class HomeController {
-  constructor() {
-    this.name = 'World';
-  }
+import {Controller, Inject, SetModule} from 'angular2-now';
 
-  changeName() {
-    this.name = 'angular-tips';
-  }
+SetModule('app')
+@Controller({name: 'homeController'})
+class HomeController
+{
+  constructor () {}
 }
+
+console.log(HomeController)
 
 export default HomeController;

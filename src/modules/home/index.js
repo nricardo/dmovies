@@ -1,12 +1,14 @@
-import {Controller, Inject, SetModule} from 'angular2-now';
+import uirouter from 'angular-ui-router';
+import {Controller, State, SetModule} from 'angular2-now';
 
-SetModule('dMovies')
-@State({name: 'home'})
-@Controller({name: 'home'})
+export default SetModule('dMovies.home', [uirouter]).name;
 
-class Home
+@Controller({name: 'homeController'})
+@State({ name: 'home', url: '/', defaultRoute: true, template: require('./home.html') })
+
+class HomeController
 {
-  constructor () {}
+  constructor () {
+    console.log(' - Home');
+  }
 }
-
-export default 'Home';

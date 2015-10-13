@@ -10,15 +10,15 @@
 
 import {Inject, Service} from 'angular2-now';
 
-@Service('tmdbService')
 @Inject(['$http'])
-class TmdbService
+@Service('tmdbService')
+class TMDBService
 {
   constructor ($http) {
     this.$http = $http;
 
-    this.url = TmdbService.API_URL;
-    this.key = TmdbService.API_KEY;
+    this.url = TMDBService.API_URL;
+    this.key = TMDBService.API_KEY;
   }
 
   search(entity, query) {
@@ -32,7 +32,7 @@ class TmdbService
   }
 }
 
-TmdbService.API_URL = 'http://api.themoviedb.org/3';
-TmdbService.API_KEY = 'dc4940972c268b026150cf7be6f01d11';
+TMDBService.API_URL = 'http://api.themoviedb.org/3';
+TMDBService.API_KEY = 'dc4940972c268b026150cf7be6f01d11';
 
-export default TmdbService;
+export default TMDBService;

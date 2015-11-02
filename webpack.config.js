@@ -1,6 +1,10 @@
 var path = require('path');
 
 module.exports = {
+	// define the tool used
+	// on development to aid debugging
+	devtool: 'source-map',
+
 	// entry point
 	context: path.join(__dirname, 'src'),
 	entry: './bootstrap.js',
@@ -47,12 +51,14 @@ module.exports = {
 
 			// loads up images
 			{ test: /\.jpg$/,	loader: 'file' },
-			{ test: /\.png$/,	loader: 'url?limit=8192' },
+			{ test: /\.png$/,	loader: 'url', query: { limit: 8192, mimetype: 'image/png' }, exclude: '/^http:/' },
 
 	    // needed by bootstrap's
+	    /*
 	    { test: /\.eot$/,    loader: 'file' },
 	    { test: /\.svg$/,    loader: 'url?limit=8192&mimetype=image/svg+xml' },
 	    { test: /\.ttf$/,    loader: 'url?limit=8192&mimetype=application/octet-stream' },
+	    */
 	    { test: /\.woff2?$/, loader: 'url?limit=8192&mimetype=application/font-woff' }
 	  ]
 	}

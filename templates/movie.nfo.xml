@@ -1,0 +1,13 @@
+<movie>
+    <title>{{ movie.title }}</title>
+    <originaltitle>{{ movie.originaltitle }}</originaltitle>
+    <sorttitle></sorttitle>
+    <set></set>
+    <rating></rating>
+    <year></year>
+    <outline></outline>
+    <plot></plot>
+    <tagline></tagline>
+    <runtime>90</runtime>
+    <genre></genre>
+</movie>

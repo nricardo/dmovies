@@ -1,0 +1,13 @@
+<pre>{{ movie | json }}</pre>
+
+<div class="media"
+  <div class="media-left">
+    <a href="#">
+      <img class="media-object" src="http://placehold.it/150x200">
+    </a>
+  </div>
+  <div class="media-body">
+    <h4 class="media-heading">{{ vm.movie.title }} <span class="badge">{{ movie.release_date | date }}</span></h4>
+    <p class="text-muted">{{ movie.overview }}</p>
+  </div>
+</div>

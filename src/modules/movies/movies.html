@@ -1,26 +1,25 @@
 <div class="page_header">
-  <h1>Movies <small>Find a movie...</small></h1>
+  <h1>Movies Collection</h1>
 </div>
 
-<pre>{{ vm | json }}</pre>
+<div id="movies" ng-show="vm.collection.length > 0">
 
-<div class="row">
-  <div class="col-xs-12 col-sm-8 col-sm-6">
-
-    <div class="input-group">
-      <input type="text" class="form-control" placeholder="Search by title..." ng-model="vm.query">
-      <span class="input-group-btn">
-        <button class="btn btn-default" type="button" ng-click="vm.search()" ng-disabled="!vm.query"><i class="fa fa-search"></i> Search</button>
-      </span>
+  <div class="panel panel-default" ng-repeat="item in vm.collection">
+    <div class="panel-heading">
+      <h3 class="panel-title" ng-bind="item.title"></h3>
     </div>
 
+    <div class="panel-body">
+      <div class="media" ng-repeat="item in item.movies | orderBy: 'release_date'">
+        <div class="media-left">
+          <img class="media-object" ng-src="{{ item.poster }}">
+        </div>
+        <div class="media-body">
+          <p class="badge">{{ item.release_date | date }}</p>
+          <p class="text-muted">{{ item.overview }}</p>
+        </div>
+      </div>
+    </div>
   </div>
-</div>
 
-<hr>
-
-<div class="row">
-  <div class="col-xs-12 col-sm-8 col-sm-6">
-    <p>Search results...</p>
-  </div>
 </div>

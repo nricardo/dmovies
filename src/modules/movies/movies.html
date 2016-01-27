@@ -2,6 +2,10 @@
   <h1>Movies Collection</h1>
 </div>
 
+<div class="text-right">
+  <button class="btn btn-default" ng-click="vm.load()">Load movies</button>
+</div>
+
 <div id="movies" ng-show="vm.collection.length > 0">
 
   <div class="panel panel-default" ng-repeat="item in vm.collection">

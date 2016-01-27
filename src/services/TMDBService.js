@@ -11,28 +11,30 @@
 
 import {Inject, Service} from 'angular2-now';
 
-@Inject(['$q', '$http'])
+import {QueueService} from './QueueService';
+
+@Inject(['$q', '$http', '$interval', 'queueService'])
 @Service('tmdbService')
 class TMDBService
 {
-  constructor ($q, $http) {
+  constructor ($q, $http, $interval, queueService) {
     console.log('TMDBService::constructor()');
 
     this.$q = $q;
     this.$http = $http;
+    this.$interval = $interval;
+
+    // the requests queue
+    this.queue = [];
+
+    this.pending = 0;
 
     // setup api endpoint and key
     this.url = TMDBService.API_URL;
     this.key = TMDBService.API_KEY;
 
-    // prepare requests queue
-    this.queue = [];
-
-    // number of requests
-    this.requests = [];
-
-    // get API's config data
-    this.config().then(response => { this.config = response.data; });
+    // get configuration
+    this.config().then(config => this.config = config);
   }
 
   config() {
@@ -57,38 +59,21 @@ class TMDBService
     // setup url for this query
     let url = this.url + '/search/' + entity;
 
-    // prepare promise
-    let deferred = this.$q.defer();
+    // build request
+    let request = {url: url, params: params};
 
     // inject request into processing queue
-    this.queue.push({url: url, params: params});
+    return this.process(request);
+  }
 
-    // process queue
-    while (this.queue.length > 0) {
-      if (this.requests.length >= 40) {
-        let request = this.requests.pop();
-
-        let response = this.$http.get(request.url, {params: request.params}).then(response => {
-          return response.data.results.map(movie => {
-            movie.poster = movie.poster_path ? this.config.images.base_url + '/w92/' + movie.poster_path : 'https://placehold.it/92x138';
-
-            return movie;
-          })
-        });
-
-        deferred.resolve(response);
-      }
-      else {
-        let request = this.queue.pop();
-
-        this.requests.push(request);
-      }
-    }
-
-    return deferred.promise;
+  process(request) {
+    return this.$http.get(request.url, {params: request.params}).then(
+      (response, status, headers, config) => response.data.results
+    );
   }
 }
 
+//TMDBService.LIMIT = 40; // limit of API requests
 TMDBService.API_URL = 'http://api.themoviedb.org/3';
 TMDBService.API_KEY = '57983e31fb435df4df77afb854740ea9';
 

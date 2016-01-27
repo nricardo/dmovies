@@ -7,7 +7,7 @@ module.exports = {
 
 	// entry point
 	context: path.join(__dirname, 'src'),
-	entry: './bootstrap.js',
+	entry: 'bootstrap.js',
 
 	// output definition
 	output: {
@@ -61,5 +61,11 @@ module.exports = {
 	    */
 	    { test: /\.woff2?$/, loader: 'url?limit=8192&mimetype=application/font-woff' }
 	  ]
+	},
+
+	// resolvers definitions
+	resolve: {
+		root: __dirname,
+		modulesDirectories: ['src', 'modules', 'components', 'node_modules']
 	}
 }

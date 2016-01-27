@@ -34,7 +34,7 @@
 /******/ 	__webpack_require__.c = installedModules;
 /******/
 /******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "";
+/******/ 	__webpack_require__.p = "js/";
 /******/
 /******/ 	// Load entry module and return exports
 /******/ 	return __webpack_require__(0);
@@ -47,8 +47,6 @@
 	'use strict';
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 	
 	var _angular = __webpack_require__(1);
 	
@@ -64,33 +62,12 @@
 	
 	__webpack_require__(4);
 	
-	// import external modules
+	// load top level component (main)
 	
-	var _modulesHome = __webpack_require__(9);
-	
-	var _modulesHome2 = _interopRequireDefault(_modulesHome);
-	
-	var _modulesMovies = __webpack_require__(12);
-	
-	var _modulesMovies2 = _interopRequireDefault(_modulesMovies);
+	__webpack_require__(9);
 	
 	_angular2['default'].extend(window, _angular2Now2['default']);
 	_angular2Now2['default'].options({ controllerAs: 'vm' });
-	
-	SetModule('d-movies', [_modulesHome2['default'], _modulesMovies2['default']]);
-	
-	var dMovies = (function () {
-	  function dMovies() {
-	    _classCallCheck(this, _dMovies);
-	
-	    console.info('dMovies starting...');
-	  }
-	
-	  var _dMovies = dMovies;
-	  dMovies = View({ template: '<ui-view></ui-view>' })(dMovies) || dMovies;
-	  dMovies = Component({ selector: 'd-movies' })(dMovies) || dMovies;
-	  return dMovies;
-	})();
 	
 	bootstrap(dMovies);
 
@@ -29750,7 +29727,7 @@
 	
 	
 	// module
-	exports.push([module.id, "body {\n  background-image: url(" + __webpack_require__(7) + ");\n  color: #fff;\n  display: flex;\n  flex-direction: column;\n  font-family: 'Open Sans', sans-serif;\n  min-height: 100vh; }\n\nheader {\n  background-color: #252525;\n  height: 50px;\n  margin-bottom: 20px;\n  padding: 10px; }\n\nmain {\n  flex: 1; }\n\nfooter {\n  background-color: #4c4c4c;\n  color: #aaa;\n  height: 40px;\n  display: flex; }\n  footer .container {\n    margin: auto; }\n", ""]);
+	exports.push([module.id, "body {\n  background-image: url(" + __webpack_require__(7) + ");\n  color: #fff;\n  display: flex;\n  flex-direction: column;\n  font-family: 'Open Sans', sans-serif;\n  min-height: 100vh; }\n\nheader {\n  background-color: #252525;\n  height: 50px;\n  margin-bottom: 20px;\n  padding: 10px; }\n\nmain {\n  flex: 1; }\n\nfooter {\n  background-color: #4c4c4c;\n  color: #aaa;\n  height: 40px;\n  display: flex; }\n  footer .container {\n    margin: auto; }\n\nbutton {\n  background-color: red;\n  color: white;\n  width: 200px; }\n", ""]);
 	
 	// exports
 
@@ -30046,6 +30023,40 @@
 /* 9 */
 /***/ function(module, exports, __webpack_require__) {
 
+	// import external modules
+	'use strict';
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+	
+	var _home = __webpack_require__(10);
+	
+	var _home2 = _interopRequireDefault(_home);
+	
+	var _movies = __webpack_require__(22);
+	
+	var _movies2 = _interopRequireDefault(_movies);
+	
+	SetModule('d-movies', [_home2['default'], _movies2['default']]);
+	
+	var dMovies = (function () {
+	  function dMovies() {
+	    _classCallCheck(this, _dMovies);
+	
+	    console.info('dMovies starting...');
+	  }
+	
+	  var _dMovies = dMovies;
+	  dMovies = View({ template: '<ui-view></ui-view>' })(dMovies) || dMovies;
+	  dMovies = Component({ selector: 'd-movies' })(dMovies) || dMovies;
+	  return dMovies;
+	})();
+
+/***/ },
+/* 10 */
+/***/ function(module, exports, __webpack_require__) {
+
 	'use strict';
 	
 	Object.defineProperty(exports, '__esModule', {
@@ -30056,23 +30067,29 @@
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 	
-	var _angularUiRouter = __webpack_require__(10);
+	var _angularUiRouter = __webpack_require__(11);
 	
 	var _angularUiRouter2 = _interopRequireDefault(_angularUiRouter);
 	
 	var _angular2Now = __webpack_require__(3);
+	
+	var _componentsA = __webpack_require__(12);
+	
+	var _componentsA2 = _interopRequireDefault(_componentsA);
+	
+	var _componentsB = __webpack_require__(17);
+	
+	var _componentsB2 = _interopRequireDefault(_componentsB);
 	
 	exports['default'] = (0, _angular2Now.SetModule)('dMovies.home', [_angularUiRouter2['default']]).name;
 	
 	var HomeController = (function () {
 	  function HomeController() {
 	    _classCallCheck(this, _HomeController);
-	
-	    console.log(' - Home');
 	  }
 	
 	  var _HomeController = HomeController;
-	  HomeController = (0, _angular2Now.State)({ name: 'home', url: '/', defaultRoute: true, template: __webpack_require__(11) })(HomeController) || HomeController;
+	  HomeController = (0, _angular2Now.State)({ name: 'home', url: '/', defaultRoute: true, template: __webpack_require__(21) })(HomeController) || HomeController;
 	  HomeController = (0, _angular2Now.Controller)({ name: 'homeController' })(HomeController) || HomeController;
 	  return HomeController;
 	})();
@@ -30080,7 +30097,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 10 */
+/* 11 */
 /***/ function(module, exports) {
 
 	/**
@@ -34455,13 +34472,221 @@
 	})(window, window.angular);
 
 /***/ },
-/* 11 */
+/* 12 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var _angular2Now = __webpack_require__(3);
+	
+	var _component = __webpack_require__(13);
+	
+	__webpack_require__(14);
+	
+	var AComponent = (function (_dmComponent) {
+	  _inherits(AComponent, _dmComponent);
+	
+	  function AComponent() {
+	    _classCallCheck(this, _AComponent);
+	
+	    _get(Object.getPrototypeOf(_AComponent.prototype), 'constructor', this).apply(this, arguments);
+	  }
+	
+	  var _AComponent = AComponent;
+	  AComponent = (0, _angular2Now.View)({ template: __webpack_require__(16) })(AComponent) || AComponent;
+	  AComponent = (0, _angular2Now.Component)({ selector: 'a-cmp' })(AComponent) || AComponent;
+	  return AComponent;
+	})(_component.dmComponent);
+
+/***/ },
+/* 13 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
+	
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+	
+	var _angular2Now = __webpack_require__(3);
+	
+	var dmComponent = (function () {
+	  function dmComponent($element) {
+	    _classCallCheck(this, _dmComponent);
+	
+	    /*
+	    let content = $element.html();
+	    let shadow = $element[0].createShadowRoot();
+	     $element.html('');
+	    shadow.innerHTML = content;
+	    */
+	
+	    // apply to all nodes a property to fake ShadomDOM
+	    this.fakeShadowCSS($element[0], $element[0].localName);
+	  }
+	
+	  _createClass(dmComponent, [{
+	    key: 'fakeShadowCSS',
+	    value: function fakeShadowCSS(element, name) {
+	      var nodes = element.children;
+	      element.setAttribute(name, '');
+	      console.log(nodes);
+	      for (var i = nodes.length; i--;) {
+	        this.fakeShadowCSS(nodes[i], name);
+	      }
+	    }
+	  }]);
+	
+	  var _dmComponent = dmComponent;
+	  dmComponent = (0, _angular2Now.Inject)(['$element'])(dmComponent) || dmComponent;
+	  return dmComponent;
+	})();
+
+	exports.dmComponent = dmComponent;
+
+/***/ },
+/* 14 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+	
+	// load the styles
+	var content = __webpack_require__(15);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(8)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/sass-loader/index.js!./a.scss", function() {
+				var newContent = require("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/sass-loader/index.js!./a.scss");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 15 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(6)();
+	// imports
+	
+	
+	// module
+	exports.push([module.id, "div[a-cmp] {\n  margin: 10px;\n  border: 1px dashed lightgray; }\n  div[a-cmp] p[a-cmp] {\n    color: green; }\n  div[a-cmp] button[a-cmp] {\n    width: 180px; }\n", ""]);
+	
+	// exports
+
+
+/***/ },
+/* 16 */
+/***/ function(module, exports) {
+
+	module.exports = "<div>\n  <p>I'm Component A!</p>\n  <button class=\"btn btn-default\">Button A</button>\n</div>\n";
+
+/***/ },
+/* 17 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var _angular2Now = __webpack_require__(3);
+	
+	var _component = __webpack_require__(13);
+	
+	__webpack_require__(18);
+	
+	var BComponent = (function (_dmComponent) {
+	  _inherits(BComponent, _dmComponent);
+	
+	  function BComponent() {
+	    _classCallCheck(this, _BComponent);
+	
+	    _get(Object.getPrototypeOf(_BComponent.prototype), 'constructor', this).apply(this, arguments);
+	  }
+	
+	  var _BComponent = BComponent;
+	  BComponent = (0, _angular2Now.View)({ template: __webpack_require__(20) })(BComponent) || BComponent;
+	  BComponent = (0, _angular2Now.Component)({ selector: 'b-cmp' })(BComponent) || BComponent;
+	  return BComponent;
+	})(_component.dmComponent);
+
+/***/ },
+/* 18 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+	
+	// load the styles
+	var content = __webpack_require__(19);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(8)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/sass-loader/index.js!./b.scss", function() {
+				var newContent = require("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/sass-loader/index.js!./b.scss");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 19 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(6)();
+	// imports
+	
+	
+	// module
+	exports.push([module.id, "div[b-cmp] {\n  margin: 20px;\n  border: 1px solid yellow; }\n  div[b-cmp] p[b-cmp] {\n    color: purple; }\n  div[b-cmp] button[b-cmp] {\n    height: 80px; }\n", ""]);
+	
+	// exports
+
+
+/***/ },
+/* 20 */
+/***/ function(module, exports) {
+
+	module.exports = "<div>\n  <p>I'm Component B!</p>\n  <button class=\"btn btn-default\">Button B</button>\n\n  <content></content>\n</div>\n\n";
+
+/***/ },
+/* 21 */
 /***/ function(module, exports) {
 
 	module.exports = "<div class=\"jumbotron\">\n  <h1>Welcome to <span class=\"text-muted\">dMovies</span></h1>\n  <p class=\"lead\">Organize your movie collection with style...</p>\n\n  <a href=\"#/movies\" role=\"button\" class=\"btn btn-primary\">Start here!</a>\n</div>\n";
 
 /***/ },
-/* 12 */
+/* 22 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -34476,70 +34701,93 @@
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 	
-	var _path = __webpack_require__(13);
+	var _path = __webpack_require__(23);
 	
 	var _path2 = _interopRequireDefault(_path);
 	
-	var _angularUiRouter = __webpack_require__(10);
+	var _angularUiRouter = __webpack_require__(11);
 	
 	var _angularUiRouter2 = _interopRequireDefault(_angularUiRouter);
 	
 	var _angular2Now = __webpack_require__(3);
 	
-	var _movie = __webpack_require__(15);
+	var _movie = __webpack_require__(25);
 	
 	var _movie2 = _interopRequireDefault(_movie);
 	
-	var _servicesTMDBService = __webpack_require__(17);
+	var _servicesTMDBService = __webpack_require__(27);
 	
 	exports['default'] = (0, _angular2Now.SetModule)('dMovies.movies', [_angularUiRouter2['default'], _movie2['default']]).name;
 	
 	var MoviesController = (function () {
-	  function MoviesController($scope, tmdbService) {
+	  function MoviesController($scope, $http, tmdbService) {
+	    var _this = this;
+	
 	    _classCallCheck(this, _MoviesController);
 	
-	    //this.$scope = $scope;
-	    $scope.vm = this;
-	
+	    this.$scope = $scope;
+	    this.$http = $http;
 	    this.tmdbService = tmdbService;
 	
-	    // init list of movies
+	    // init movies collection
 	    this.movies = [];
+	    this.collection = [];
 	
-	    // get API's config data
-	    //this.tmdbService.config().then(response => { this.config = response.data });
-	    this.test = 'http://1.bp.blogspot.com/-0KNGLCtQHk4/UyAMHFnWrfI/AAAAAAAAAK8/w77Sh2oKclk/s1600/angularjs.png';
+	    this.counter = 0;
 	
-	    this.query = "star wars";
+	    $scope.vm = this;
+	
+	    // load current list of movies from file system...
+	    this.$http.get('/data/movies').then(function (response) {
+	      // get list of movies
+	      _this.movies = response.data.replace(/^\s+|\s+$/g, '').split('\n');
+	    });
 	  }
 	
 	  _createClass(MoviesController, [{
+	    key: 'load',
+	    value: function load() {
+	      var _this2 = this;
+	
+	      // search each one of them....
+	      this.movies.map(function (movie) {
+	        // splits movie title name into real title and year
+	        var matches = movie.match(/(.+) \((\d+)\)/);
+	
+	        // get movie title and year from the split
+	        var title = matches[1];
+	        var year = matches[2];
+	
+	        // run the search...
+	        _this2.tmdbService.search('movie', title, { year: year }).then(function (movies) {
+	          _this2.counter++;
+	          //this.collection.push({title: title, movies: movies});
+	        });
+	      });
+	    }
+	  }, {
 	    key: 'search',
 	    value: function search() {
-	      var _this = this;
+	      var _this3 = this;
 	
 	      // make the search using TMDB api
-	      this.tmdbService.search('movie', this.query).then(function (response) {
-	        // check errors
-	        if (response.status !== 200) return;
-	
-	        // prepare movies
-	        _this.movies = response.data.results;
+	      this.tmdbService.search('movie', this.query).then(function (movies) {
+	        return _this3.movies = movies;
 	      });
 	    }
 	  }]);
 	
 	  var _MoviesController = MoviesController;
-	  MoviesController = (0, _angular2Now.State)({ name: 'movies', url: '/movies', template: __webpack_require__(18) })(MoviesController) || MoviesController;
+	  MoviesController = (0, _angular2Now.State)({ name: 'movies', url: '/movies', template: __webpack_require__(29), stylesheet: __webpack_require__(30) })(MoviesController) || MoviesController;
 	  MoviesController = (0, _angular2Now.Controller)({ name: 'moviesController' })(MoviesController) || MoviesController;
-	  MoviesController = (0, _angular2Now.Inject)(['$scope', 'tmdbService'])(MoviesController) || MoviesController;
+	  MoviesController = (0, _angular2Now.Inject)(['$scope', '$http', 'tmdbService'])(MoviesController) || MoviesController;
 	  return MoviesController;
 	})();
 
 	module.exports = exports['default'];
 
 /***/ },
-/* 13 */
+/* 23 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {// Copyright Joyent, Inc. and other Node contributors.
@@ -34767,10 +35015,10 @@
 	    }
 	;
 	
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(14)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(24)))
 
 /***/ },
-/* 14 */
+/* 24 */
 /***/ function(module, exports) {
 
 	// shim for using process in browser
@@ -34867,7 +35115,7 @@
 
 
 /***/ },
-/* 15 */
+/* 25 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -34888,7 +35136,7 @@
 	  }
 	
 	  var _Movie = Movie;
-	  Movie = (0, _angular2Now.View)({ template: __webpack_require__(16) })(Movie) || Movie;
+	  Movie = (0, _angular2Now.View)({ template: __webpack_require__(26) })(Movie) || Movie;
 	  Movie = (0, _angular2Now.Component)({
 	    restrict: 'E',
 	    selector: 'movie',
@@ -34902,13 +35150,13 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 16 */
+/* 26 */
 /***/ function(module, exports) {
 
 	module.exports = "<pre>{{ movie | json }}</pre>\n\n<div class=\"media\"\n  <div class=\"media-left\">\n    <a href=\"#\">\n      <img class=\"media-object\" src=\"http://placehold.it/150x200\">\n    </a>\n  </div>\n  <div class=\"media-body\">\n    <h4 class=\"media-heading\">{{ vm.movie.title }} <span class=\"badge\">{{ movie.release_date | date }}</span></h4>\n    <p class=\"text-muted\">{{ movie.overview }}</p>\n  </div>\n</div>\n";
 
 /***/ },
-/* 17 */
+/* 27 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -34932,46 +35180,75 @@
 	
 	var _angular2Now = __webpack_require__(3);
 	
+	var _QueueService = __webpack_require__(28);
+	
 	var TMDBService = (function () {
-	  function TMDBService($http) {
+	  function TMDBService($q, $http, $interval, queueService) {
 	    _classCallCheck(this, _TMDBService);
 	
-	    this.$http = $http;
+	    console.log('TMDBService::constructor()');
 	
-	    this.url = TMDBService.API_URL;
-	    this.key = TMDBService.API_KEY;
+	    this.$q = $q;
+	    this.$http = $http;
+	    this.$interval = $interval;
+	    this.queueService = queueService;
+	
+	    // call initialize
+	    this.init();
 	  }
 	
 	  _createClass(TMDBService, [{
+	    key: 'init',
+	    value: function init() {
+	      var _this = this;
+	
+	      // setup api endpoint and key
+	      this.url = TMDBService.API_URL;
+	      this.key = TMDBService.API_KEY;
+	
+	      // prepare everything that we need...
+	      this.$q.all([
+	
+	      // get configuration
+	      this.config().then(function (config) {
+	        return _this.config = config;
+	      })]).then();
+	    }
+	  }, {
 	    key: 'config',
 	    value: function config() {
 	      // get configuration data
 	      return this.$http({
 	        method: 'GET',
 	        url: this.url + '/configuration',
-	        params: {
-	          api_key: this.key
-	        }
+	        params: { api_key: this.key }
 	      });
 	    }
 	  }, {
 	    key: 'search',
-	    value: function search(entity, query) {
-	      // make the call the api
-	      return this.$http({
-	        method: 'GET',
-	        url: this.url + '/search/' + entity,
-	        params: {
-	          query: query,
-	          api_key: this.key
-	        }
+	    value: function search(entity, query, options) {
+	      // check passed options
+	      options = options || {};
+	
+	      // setup parameters
+	      var params = { query: encodeURIComponent(query), api_key: this.key };
+	
+	      // merge options into params
+	      params = angular.merge(params, options);
+	
+	      // setup url for this query
+	      var url = this.url + '/search/' + entity;
+	
+	      // inject request into processing queue
+	      return this.queueService.inject({ url: url, params: params }).then(function (response) {
+	        return response ? response.data.results : undefined;
 	      });
 	    }
 	  }]);
 	
 	  var _TMDBService = TMDBService;
 	  TMDBService = (0, _angular2Now.Service)('tmdbService')(TMDBService) || TMDBService;
-	  TMDBService = (0, _angular2Now.Inject)(['$http'])(TMDBService) || TMDBService;
+	  TMDBService = (0, _angular2Now.Inject)(['$q', '$http', '$interval', 'queueService'])(TMDBService) || TMDBService;
 	  return TMDBService;
 	})();
 	
@@ -34982,10 +35259,131 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 18 */
+/* 28 */
+/***/ function(module, exports, __webpack_require__) {
+
+	
+	'use strict';
+	
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+	
+	var _angular2Now = __webpack_require__(3);
+	
+	var QueueService = (function () {
+	  function QueueService($q, $http) {
+	    _classCallCheck(this, _QueueService);
+	
+	    console.log('QueueService::constructor()');
+	
+	    this.$q = $q;
+	    this.$http = $http;
+	
+	    // requests queue
+	    this.queue = [];
+	
+	    // number pending requests
+	    this.pending = 0;
+	  }
+	
+	  // define our queue limit
+	
+	  _createClass(QueueService, [{
+	    key: 'process',
+	    value: function process() {
+	      var _this = this;
+	
+	      // process next request in queue
+	      while (this.queue.length > 0) {
+	        // check if we're in good condition to proceed
+	        if (this.requests >= QueueService.LIMIT) return this.$q.when(undefined);
+	
+	        // get request
+	        var request = this.queue.shift();
+	
+	        // increment requests being processed
+	        this.requests++;
+	
+	        // make the call...
+	        return this.$http.get(request.url, { params: request.params }).then(function (response) {
+	          // got an answer, so decrement
+	          _this.requests--;
+	
+	          // resolve the deferred promise
+	          return response;
+	        });
+	      }
+	    }
+	  }, {
+	    key: 'inject',
+	    value: function inject(request) {
+	      var deferred = this.$q.defer();
+	
+	      // inform that a new pending request just arrived
+	      this.pending++;
+	
+	      // inject request into queue
+	      this.queue.push({ request: request, deferred: deferred });
+	
+	      // return the promise
+	      return deferred.promise;
+	    }
+	  }]);
+	
+	  var _QueueService = QueueService;
+	  QueueService = (0, _angular2Now.Service)('queueService')(QueueService) || QueueService;
+	  QueueService = (0, _angular2Now.Inject)(['$q', '$http'])(QueueService) || QueueService;
+	  return QueueService;
+	})();
+	
+	QueueService.LIMIT = 40;
+
+/***/ },
+/* 29 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"page_header\">\n  <h1>Movies <small>Find a movie...</small></h1>\n</div>\n\n<div class=\"row\">\n  <div class=\"col-xs-12 col-sm-8 col-sm-6\">\n\n    <div class=\"input-group\">\n      <input type=\"text\" class=\"form-control\" placeholder=\"Search by title...\" ng-model=\"vm.query\">\n      <span class=\"input-group-btn\">\n        <button class=\"btn btn-default\" type=\"button\" ng-click=\"vm.search()\" ng-disabled=\"!vm.query\"><i class=\"fa fa-search\"></i> Search</button>\n      </span>\n    </div>\n\n  </div>\n</div>\n\n\n      <img class=\"media-object\" ng-src=\"vm.test\">\n\n\n<hr>\n\n<div ng-show=\"vm.movies.length > 0\">\n  <p>Search results...</p>\n\n  <div class=\"media\" ng-repeat=\"group in vm.movies\">\n    <div class=\"media-left\">\n      <img class=\"media-object\" src=\"xxxHTMLLINKxxx0.87070432840846480.6747048643883318xxx\">\n    </div>\n    <div class=\"media-body\">\n      <h4 class=\"media-heading\">{{ vm.movie.title }} <span class=\"badge\">{{ vm.movie.release_date | date }}</span></h4>\n      <p class=\"text-muted\">{{ vm.movie.overview }}</p>\n    </div>\n  </div>\n\n</div>\n";
+	module.exports = "<div class=\"page_header\">\n  <h1>Movies Collection</h1>\n</div>\n\n<div class=\"text-right\">\n  <button class=\"btn btn-default\" ng-click=\"vm.load()\">Load movies</button>\n</div>\n\n<div id=\"movies\" ng-show=\"vm.collection.length > 0\">\n\n  <div class=\"panel panel-default\" ng-repeat=\"item in vm.collection\">\n    <div class=\"panel-heading\">\n      <h3 class=\"panel-title\" ng-bind=\"item.title\"></h3>\n    </div>\n\n    <div class=\"panel-body\">\n      <div class=\"media\" ng-repeat=\"item in item.movies | orderBy: 'release_date'\">\n        <div class=\"media-left\">\n          <img class=\"media-object\" ng-src=\"{{ item.poster }}\">\n        </div>\n        <div class=\"media-body\">\n          <p class=\"badge\">{{ item.release_date | date }}</p>\n          <p class=\"text-muted\">{{ item.overview }}</p>\n        </div>\n      </div>\n    </div>\n  </div>\n\n</div>\n";
+
+/***/ },
+/* 30 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+	
+	// load the styles
+	var content = __webpack_require__(31);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(8)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/sass-loader/index.js!./movies.scss", function() {
+				var newContent = require("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/sass-loader/index.js!./movies.scss");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 31 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(6)();
+	// imports
+	
+	
+	// module
+	exports.push([module.id, "#movies {\n  display: flex;\n  flex-flow: row wrap;\n  justify-content: space-between;\n  margin: 20px 0; }\n", ""]);
+	
+	// exports
+
 
 /***/ }
 /******/ ]);

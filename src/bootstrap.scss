@@ -1,5 +1,4 @@
 // ===== Generic application styles ===========================================
-
 body {
   background-image: url(../public/images/bg.png);
   color: #fff;
@@ -31,8 +30,14 @@ footer {
   }
 }
 
-button {
-  background-color: red;
-  color: white;
-  width: 200px;
+#test {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+
+  .item {
+    flex: 1;
+    border: 1px solid red;
+    margin: 5px;
+  }
 }

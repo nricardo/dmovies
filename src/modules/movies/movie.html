@@ -1,13 +1,24 @@
-<pre>{{ movie | json }}</pre>
+<div id="movie">
+  <div class="page-header">
+    <div>
+      <h1 ng-bind="vm.movie.title || vm.movie.name"></h1>
+      <h3 class="text-muted" ng-bind="vm.movie.tagline || '-- tagline --'"></h3>
+    </div>
+    <div>
+      <h2><span class="label label-info" ng-bind="vm.movie.year"></span></h2>
+    </div>
+  </div>
 
-<div class="media"
-  <div class="media-left">
-    <a href="#">
-      <img class="media-object" src="http://placehold.it/150x200">
-    </a>
+  <div class="media">
+    <div class="media-left">
+      <a href="">
+        <img class="poster" src="http://placehold.it/250x375">
+      </a>
+    </div>
+    <div class="media-body">
+      <h4 class="media-heading" ng-bind="vm.movie.plot"></h4>
+    </div>
   </div>
-  <div class="media-body">
-    <h4 class="media-heading">{{ vm.movie.title }} <span class="badge">{{ movie.release_date | date }}</span></h4>
-    <p class="text-muted">{{ movie.overview }}</p>
-  </div>
+
+  <button class="btn btn-primary btn-small" ng-click="vm.fetch()">Fetch from TMDB...</button>
 </div>

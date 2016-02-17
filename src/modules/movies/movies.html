@@ -1,29 +1,33 @@
 <div class="page_header">
-  <h1>Movies Collection</h1>
+  <h1>
+    Movies Collection
+    <small class="muted">Search for a movie in your collection. View details, edit info and mark your favorite ones!</small>
+  </h1>
 </div>
 
-<div class="text-right">
-  <button class="btn btn-default" ng-click="vm.load()">Load movies</button>
-</div>
+<hr />
 
-<div id="movies" ng-show="vm.collection.length > 0">
+<table id="movies" class="table table-hover table-condensed">
+  <thead>
+    <tr>
+      <th class="text-right">#</th>
+      <th>Title</th>
+      <th>Year</th>
+      <th class="text-center">Status</th>
+    </tr>
+  </thead>
 
-  <div class="panel panel-default" ng-repeat="item in vm.collection">
-    <div class="panel-heading">
-      <h3 class="panel-title" ng-bind="item.title"></h3>
-    </div>
-
-    <div class="panel-body">
-      <div class="media" ng-repeat="item in item.movies | orderBy: 'release_date'">
-        <div class="media-left">
-          <img class="media-object" ng-src="{{ item.poster }}">
-        </div>
-        <div class="media-body">
-          <p class="badge">{{ item.release_date | date }}</p>
-          <p class="text-muted">{{ item.overview }}</p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-</div>
+  <tbody>
+    <tr ng-repeat="movie in vm.movies" ng-click="vm.show(movie)">
+      <td class="text-right">{{ $index + 1 }}</td>
+      <td>{{ movie.name }}</td>
+      <td>{{ movie.year }}</td>
+      <td class="text-center">
+        <i class="fa fa-circle" ng-class="{
+          'text-danger': movie.status === '',
+          'text-success': movie.status === 'SYNC'
+          }"></i>
+      </td>
+    </tr>
+  </tbody>
+</table>

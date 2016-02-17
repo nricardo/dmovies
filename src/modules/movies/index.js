@@ -1,16 +1,13 @@
 'use strict';
 
-import path from 'path';
-
 import uirouter from 'angular-ui-router';
 import {Controller, Inject, State, SetModule} from 'angular2-now';
 
-import movie from './movie';
 import {TMDBService} from '../../services/TMDBService';
 
-export default SetModule('dMovies.movies', [uirouter, movie]).name;
+export default SetModule('dMovies.movies', [uirouter]).name;
 
-@Inject(['$scope', '$http', 'tmdbService'])
+@Inject(['$scope', '$injector'])
 @Controller({name: 'moviesController'})
 @State({ name: 'movies', url: '/movies', template: require('./movies.html'), stylesheet: require('./movies.scss') })
 
@@ -18,39 +15,24 @@ class MoviesController
 {
   tmdbService:TMDBService;
 
-  constructor ($scope, $http, tmdbService) {
+  constructor ($scope, $injector) {
     this.$scope = $scope;
-    this.$http = $http;
-    this.tmdbService = tmdbService;
-
-    // init movies collection
-    this.movies = [];
-    this.collection = [];
+    this.$http = $injector.get('$http');
+    this.$location = $injector.get('$location');
+    this.$firebase = $injector.get('$firebaseArray');
+    this.tmdbService = $injector.get('tmdbService');
 
     $scope.vm = this;
 
-    // load current list of movies from file system...
-    this.$http.get('/data/movies').then(response => {
-      // get list of movies
-      this.movies = response.data.replace(/^\s+|\s+$/g, '').split('\n');
-    });
+    // setup firebase reference
+    let movies = new Firebase('https://dmovies.firebaseio.com/movies');
+
+    // load collection of movies
+    this.movies = this.$firebase(movies);
   }
 
-  load() {
-    // search each one of them....
-    this.movies.map(movie => {
-      // splits movie title name into real title and year
-      let matches = movie.match(/(.+) \((\d+)\)/);
-
-      // get movie title and year from the split
-      let title = matches[1];
-      let year  = matches[2];
-
-      // run the search...
-      this.tmdbService.search('movie', title, {year: year}).then(movies => {
-        this.collection.push({title: title, movies: movies});
-      });
-    });
+  show (movie) {
+    this.$location.path('/movie/' + movie.$id);
   }
 
   search () {

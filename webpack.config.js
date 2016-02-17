@@ -65,7 +65,7 @@ module.exports = {
 
 	// resolvers definitions
 	resolve: {
-		root: __dirname,
-		modulesDirectories: ['src', 'modules', 'components', 'node_modules']
+		root: path.join(__dirname, 'src'),
+		modulesDirectories: ['modules', 'components', 'services', 'node_modules']
 	}
 }

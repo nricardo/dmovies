@@ -14,7 +14,6 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "angular": "^1.4.6",
     "angular-ui-router": "^0.2.15",
     "angular2-now": "^0.3.8",
     "babel-core": "^5.8.25",

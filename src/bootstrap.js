@@ -1,7 +1,12 @@
 'use strict';
 
-import angular from 'angular';
+// import AngularJS
+//import angular from 'angular';
 import angular2now from 'angular2-now';
+
+// import Firebase and AngularFire
+//import firebase from 'firebase';
+//import angularfire from 'angularfire';
 
 // make angular2-now stuff available everywhere
 angular.extend(window, angular2now);

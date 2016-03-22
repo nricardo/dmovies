@@ -3,31 +3,19 @@
   * @author: Nelson Ricardo
   * @description: AngularJS service using $resource for TMDB REST api v3
   *
-  * API key: 57983e31fb435df4df77afb854740ea9
-
   **/
 
 'use strict';
 
 import {Inject, Service} from 'angular2-now';
 
-import {QueueService} from './QueueService';
-
-@Inject(['$q', '$http', '$interval', 'queueService'])
+@Inject(['$q', '$http'])
 @Service('tmdbService')
 class TMDBService
 {
-  constructor ($q, $http, $interval, queueService) {
-    console.log('TMDBService::constructor()');
-
+  constructor ($q, $http) {
     this.$q = $q;
     this.$http = $http;
-    this.$interval = $interval;
-
-    // the requests queue
-    this.queue = [];
-
-    this.pending = 0;
 
     // setup api endpoint and key
     this.url = TMDBService.API_URL;
@@ -59,15 +47,7 @@ class TMDBService
     // setup url for this query
     let url = this.url + '/search/' + entity;
 
-    // build request
-    let request = {url: url, params: params};
-
-    // inject request into processing queue
-    return this.process(request);
-  }
-
-  process(request) {
-    return this.$http.get(request.url, {params: request.params}).then(
+    return this.$http.get(url, {params: params}).then(
       (response, status, headers, config) => response.data.results
     );
   }
@@ -75,6 +55,6 @@ class TMDBService
 
 //TMDBService.LIMIT = 40; // limit of API requests
 TMDBService.API_URL = 'http://api.themoviedb.org/3';
-TMDBService.API_KEY = '57983e31fb435df4df77afb854740ea9';
+TMDBService.API_KEY = 'f7f51775877e0bb6703520952b3c7840';
 
 export default TMDBService;

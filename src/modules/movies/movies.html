@@ -1,33 +1,33 @@
 <div class="page_header">
   <h1>
     Movies Collection
-    <small class="muted">Search for a movie in your collection. View details, edit info and mark your favorite ones!</small>
+    <small class="muted">Search, view or edit details info and mark your favorite ones!</small>
   </h1>
 </div>
 
+<form ng-submit="vm.search()">
+  <div class="row">
+    <div class="col-xs-12 col-sm-8 col-md-6">
+      <input type="search" class="form-control" placeholder="Search movie..." ng-model="vm.query">
+    </div>
+  </div>
+</form>
+
 <hr />
 
-<table id="movies" class="table table-hover table-condensed">
-  <thead>
-    <tr>
-      <th class="text-right">#</th>
-      <th>Title</th>
-      <th>Year</th>
-      <th class="text-center">Status</th>
-    </tr>
-  </thead>
+<section id="movies">
 
-  <tbody>
-    <tr ng-repeat="movie in vm.movies" ng-click="vm.show(movie)">
-      <td class="text-right">{{ $index + 1 }}</td>
-      <td>{{ movie.name }}</td>
-      <td>{{ movie.year }}</td>
-      <td class="text-center">
-        <i class="fa fa-circle" ng-class="{
-          'text-danger': movie.status === '',
-          'text-success': movie.status === 'SYNC'
-          }"></i>
-      </td>
-    </tr>
-  </tbody>
-</table>
+  <article class="movie" ng-repeat="movie in vm.movies" ng-click="vm.show(movie)">
+    <div class="poster no-poster bg-color-{{$index%5+1}}" ng-hide="movie.poster">
+      <span ng-bind="movie.name.charAt(0) | uppercase"></span>
+    </div>
+
+    <img class="poster" ng-src="movie.poster" ng-if="movie.poster">
+
+    <h5 class="title">
+      <span ng-bind="movie.title || movie.name"></span>&nbsp;
+      <small class="text-right" ng-bind="movie.year"></small>
+    </h5>
+  </article>
+
+</section>

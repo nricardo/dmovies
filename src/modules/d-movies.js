@@ -5,9 +5,9 @@ import {Component, View, SetModule} from 'angular2-now';
 // import external modules
 import home from 'home';
 import movies from 'movies';
-import movie from 'movies/movie';
+//import movie from 'movies/movie';
 
-export default SetModule('d-movies', ["firebase", home, movie, movies]).name;
+export default SetModule('d-movies', ["firebase", home, movies]).name;
 
 @Component({ selector: 'd-movies' })
 @View({ template: '<ui-view></ui-view>'})

@@ -1,15 +1,22 @@
 'use strict';
 
 import uirouter from 'angular-ui-router';
-import {Controller, Inject, State, SetModule} from 'angular2-now';
+import {Component, Inject, State, SetModule} from 'angular2-now';
 
-import {TMDBService} from '../../services/TMDBService';
+import {TMDBService} from 'services/TMDBService';
 
 export default SetModule('dMovies.movie', [uirouter]).name;
 
 @Inject(['$scope', '$injector'])
-@Controller({name: 'movieController'})
-@State({ name: 'movie', url: '/movie/:id', template: require('./movie.html'), stylesheet: require('./movie.scss') })
+@Component({ selector: 'movie' })
+@State({
+  name: 'movie',
+  url: '/movie/:id',
+  controllerAs: 'vm',
+  controller: MovieController,
+  template: require('./movie.html'),
+  stylesheet: require('./movie.scss')
+})
 
 class MovieController
 {
@@ -20,16 +27,16 @@ class MovieController
     this.$http = $injector.get('$http');
     this.$params = $injector.get('$stateParams');
     this.$location = $injector.get('$location');
-    this.$firebase = $injector.get('$firebaseObject');
     this.tmdbService = $injector.get('tmdbService');
 
-    $scope.vm = this;
-
     // setup firebase references
-    let movie = new Firebase('https://dmovies.firebaseio.com/movies/' + this.$params['id']);
+    let ref = firebase.database().ref('movies/' + this.$params['id']);
 
     // load movie info
-    this.movie = this.$firebase(movie);
+    ref.once('value').then(data => {
+      this.movie = data.val();
+      this.$scope.$apply();
+    });
   }
 
   fetch() {

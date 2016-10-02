@@ -1,32 +1,30 @@
 <div class="page_header">
   <h1>
-    Movies Collection
+    Movies Collection<br/>
     <small class="muted">Search, view or edit details info and mark your favorite ones!</small>
   </h1>
 </div>
 
-<form ng-submit="vm.search()">
-  <div class="row">
-    <div class="col-xs-12 col-sm-8 col-md-6">
-      <input type="search" class="form-control" placeholder="Search movie..." ng-model="vm.query">
-    </div>
-  </div>
-</form>
-
-<hr />
+<div class="alert alert-info alert-dismissible" role="alert" ng-show="vm.moviesNotScrapped > 0">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  <p>
+    There's <span class="badge" ng-bind="vm.moviesNotScrapped"></span> movies without metadata information!
+    &nbsp;<button class="btn btn-sm btn-default" role="button" ng-click="vm.scrapeAll()">Scrape</button>
+  </p>
+</div>
 
 <section id="movies">
 
   <article class="movie" ng-repeat="movie in vm.movies" ng-click="vm.show(movie)">
     <div class="poster no-poster bg-color-{{$index%5+1}}" ng-hide="movie.poster">
-      <span ng-bind="movie.name.charAt(0) | uppercase"></span>
+      <span ng-bind="movie.title.charAt(0) | uppercase"></span>
     </div>
 
-    <img class="poster" ng-src="movie.poster" ng-if="movie.poster">
+    <img class="poster" ng-src="{{movie.poster}}" ng-if="movie.poster">
 
     <h5 class="title">
-      <span ng-bind="movie.title || movie.name"></span>&nbsp;
-      <small class="text-right" ng-bind="movie.year"></small>
+      <span ng-bind="movie.title"></span>&nbsp;
+      <small class="text-right" ng-bind="(movie.date | date:'yyyy') || movie.year"></small>
     </h5>
   </article>
 

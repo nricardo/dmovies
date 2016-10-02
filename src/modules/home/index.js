@@ -1,7 +1,10 @@
-import uirouter from 'angular-ui-router';
+'use strict';
+
+// import external modules
 import {Controller, State, SetModule} from 'angular2-now';
 
-export default SetModule('dMovies.home', [uirouter]).name;
+// define this module
+export default SetModule('dMovies.home', []).name;
 
 @Controller({name: 'homeController'})
 @State({ name: 'home', url: '/', defaultRoute: true, template: require('./home.html') })

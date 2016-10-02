@@ -1,13 +1,10 @@
 <div id="movie">
   <div class="page-header">
-    <div>
-      <h1 ng-bind="vm.movie.title || vm.movie.name"></h1>
-      <h3 class="text-muted" ng-bind="vm.movie.tagline || '-- tagline --'"></h3>
-    </div>
-    <div>
-      <h2><span class="label label-info" ng-bind="vm.movie.year"></span></h2>
-    </div>
+    <h1 ng-bind="vm.movie.title || vm.movie.name"></h1>
+    <h3 class="text-muted" ng-bind="vm.movie.tagline || '#'"></h3>
   </div>
+
+  <h2><span class="label label-info" ng-bind="vm.movie.year"></span></h2>
 
   <div class="media">
     <div class="media-left">

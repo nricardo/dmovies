@@ -9,7 +9,7 @@ import home from 'home';
 import movies from 'movies';
 
 // define this module
-export default SetModule('d-movies', [uirouter, home, movies]).name;
+export default SetModule('d-movies', ['ui.bootstrap', uirouter, home, movies]).name;
 
 @Component({ selector: 'd-movies' })
 @View({ template: '<ui-view></ui-view>'})

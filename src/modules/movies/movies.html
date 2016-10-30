@@ -5,15 +5,14 @@
   </h1>
 </div>
 
-<div class="alert alert-info alert-dismissible" role="alert" ng-show="vm.moviesNotScrapped > 0">
-  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-  <p>
-    There's <span class="badge" ng-bind="vm.moviesNotScrapped"></span> movies without metadata information!
-    &nbsp;<button class="btn btn-sm btn-default" role="button" ng-click="vm.scrapeAll()">Scrape</button>
-  </p>
+<div uib-alert class="alert alert-info alert-dismissible" role="alert" ng-show="vm.moviesNotScrapped > 0">
+  <span class="pull-right">
+    <button class="btn btn-sm btn-default" role="button" ng-click="vm.scrapeAll()">Scrape</button>
+  </span>
+  There's <span class="badge" ng-bind="vm.moviesNotScrapped"></span> movies without metadata information!
 </div>
 
-<section id="movies">
+<section id="movies" infinite-scroll="vm.loadMovies()">
 
   <article class="movie" ng-repeat="movie in vm.movies" ng-click="vm.show(movie)">
     <div class="poster no-poster bg-color-{{$index%5+1}}" ng-hide="movie.poster">

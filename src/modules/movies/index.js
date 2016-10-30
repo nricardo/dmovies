@@ -1,11 +1,13 @@
 'use strict';
 
 // import external modules
+import infiniteScroll from 'ng-infinite-scroll';
 import {Controller, Inject, State, SetModule} from 'angular2-now';
 
+// load services
 import {TMDBService} from 'services/TMDBService';
 
-export default SetModule('dMovies.movies', [])
+export default SetModule('dMovies.movies', [infiniteScroll])
 .config(($stateProvider) => {
   $stateProvider
   .state('movies', {
@@ -45,19 +47,22 @@ class MoviesController {
     // setup firebase reference
     this.dbMovies = firebase.database().ref().child('movies');
 
-    let loadMovies = (data) => {
-      // list of movies from DB
-      let movies = data.val();
-
-      // number of movies not scrapped yet
-      this.moviesNotScrapped = movies.reduce((n, m) => m.id ? n : (n+1), 0);
-
-      // let Angular know about this assignment
-      this.$scope.$apply(() => this.movies = movies);
-    };
-
     // load collection of movies
-    this.dbMovies.limitToFirst(40).on('value', loadMovies);
+    this.dbMovies.limitToFirst(40).on('value', (data) => this.loadMovies(data));
+  }
+
+  loadMovies(data) {
+    let loading = true;
+    console.debug(' - loading movies...');
+
+    // list of movies from DB
+    let movies = data.val();
+
+    // number of movies not scrapped yet
+    this.moviesNotScrapped = movies.reduce((n, m) => m.id ? n : (n+1), 0);
+
+    // let Angular know about this assignment
+    this.$scope.$apply(() => this.movies = movies);
   }
 
   show(movie) {
@@ -70,22 +75,26 @@ class MoviesController {
     // read stored data
     this.dbMovie.on('value', data => {
       this.movie = data.val();
-      this.$state.go('movies.detail', {id: id});
+      this.$state.go('movies.item', {id: id});
     });
   }
 
   scrapeAll() {
-    let queries = [];
-
     // cycle through all movies
     this.movies.map((movie, index) => {
       // skip scrapping if we've got already an id attached
       if (movie.id) return null;
 
-      // ask metadata form this movie
+      // ask metadata for this movie
       this.scrape(movie).then(metadata => {
-        if (metadata) this.$scope.$apply(() => this.movies[index] = metadata);
-      })
+        if (metadata) {
+          // -- save into DB
+          this.dbMovies.child(index).update(metadata).then(() => {
+            console.debug(' * updated DB (/movies/%s): %s', index, metadata.id);
+            //this.$scope.$apply(() => this.movies[index] = metadata);
+          });
+        }
+      });
     });
   }
 

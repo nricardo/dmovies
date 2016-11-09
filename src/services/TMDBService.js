@@ -58,7 +58,7 @@ class TMDBService
   }
 
   getBackdropUrl(path) {
-    return "".concat(this.config.images.base_url, "original", path);
+    return "".concat(this.config.images.base_url, "w150", path);
   }
 
   getPosterUrl(path) {

@@ -13,7 +13,7 @@ angular.extend(window, angular2now);
 angular2now.options({ controllerAs: 'vm' })
 
 // load app's stylesheet
-import 'bootstrap.scss';
+import 'stylesheets/d-movies.scss';
 
 // load top level component (main)
 import {dMovies} from 'd-movies';

@@ -1,5 +1,12 @@
+// -- define app's theme
+@import 'slate';
+
+// -- import Bootstrap framework
+@import 'bootstrap';
+
+// -- app's styles goes here...
 body {
-  background-image: url(../public/images/bg.png);
+  background-image: url(images/bg.png);
   color: #fff;
   display: flex;
   flex-direction: column;
@@ -17,7 +24,7 @@ main {
   flex: 1;
   margin: 20px;
 
-  @media (min-width: 480px) {
+  @media (min-width: $screen-sm-min) {
     //background-color: red;
   }
 }

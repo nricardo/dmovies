@@ -39,6 +39,7 @@ class MoviesController {
     this.movies = [];
     this.moviesNotScrapped = 0;
 
+
     // start things up!
     this.init();
   }
@@ -47,22 +48,34 @@ class MoviesController {
     // setup firebase reference
     this.dbMovies = firebase.database().ref().child('movies');
 
+    // init 
+    this.offset = 0;
+    this.itemsToLoad = 10;
+    this.loading = false;
+
     // load collection of movies
-    this.dbMovies.limitToFirst(40).on('value', (data) => this.loadMovies(data));
+    this.loadMovies();
   }
 
-  loadMovies(data) {
-    let loading = true;
+  loadMovies() {
+    if (this.loading) return;
     console.debug(' - loading movies...');
 
-    // list of movies from DB
-    let movies = data.val();
+    this.loading = true;
+    this.dbMovies.limitToFirst(this.itemsToLoad).on('value', (data) => {
+      // list of movies from DB
+      let movies = data.val() || [];
+      console.log('got:', movies);
 
-    // number of movies not scrapped yet
-    this.moviesNotScrapped = movies.reduce((n, m) => m.id ? n : (n+1), 0);
+      // number of movies not scrapped yet
+      this.moviesNotScrapped = movies.reduce((n, m) => m.id ? n : (n+1), 0);
 
-    // let Angular know about this assignment
-    this.$scope.$apply(() => this.movies = movies);
+      // let Angular know about this assignment
+      this.$scope.$apply(() => {
+        this.movies = movies;
+        this.loading = false;
+      });
+    })
   }
 
   show(movie) {

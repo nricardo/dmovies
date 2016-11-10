@@ -33,49 +33,39 @@ class MoviesController {
     this.$q = $injector.get('$q');
     this.$state = $injector.get('$state');
     this.$params = $injector.get('$stateParams');
+    this.$timeout = $injector.get('$timeout');
     this.tmdbService = $injector.get('tmdbService');
 
     // init movie collection
     this.movies = [];
-    this.moviesNotScrapped = 0;
-
 
     // start things up!
     this.init();
   }
 
   init() {
-    // setup firebase reference
-    this.dbMovies = firebase.database().ref().child('movies');
-
     // init 
     this.offset = 0;
     this.itemsToLoad = 10;
     this.loading = false;
 
-    // load collection of movies
-    this.loadMovies();
+    // setup firebase reference
+    this.dbMovies = firebase.database().ref('movies');
   }
 
   loadMovies() {
-    if (this.loading) return;
-    console.debug(' - loading movies...');
-
     this.loading = true;
-    this.dbMovies.limitToFirst(this.itemsToLoad).on('value', (data) => {
-      // list of movies from DB
-      let movies = data.val() || [];
-      console.log('got:', movies);
-
-      // number of movies not scrapped yet
-      this.moviesNotScrapped = movies.reduce((n, m) => m.id ? n : (n+1), 0);
-
-      // let Angular know about this assignment
-      this.$scope.$apply(() => {
+    let ref = this.dbMovies.startAt(null, ''+this.offset).limitToFirst(this.itemsToLoad);
+    ref.on('value', (snapshot) => {
+      let data = snapshot.exists() ? snapshot.exportVal() : {};
+      let values = Object.values(data);
+      let movies = [].concat(this.movies, values);
+      this.$timeout(() => {
         this.movies = movies;
+        this.offset += values.length;
         this.loading = false;
-      });
-    })
+      });      
+    });
   }
 
   show(movie) {

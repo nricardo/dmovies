@@ -12,7 +12,11 @@
   There's <span class="badge" ng-bind="vm.moviesNotScrapped"></span> movies without metadata information!
 </div>
 
-<section id="movies" infinite-scroll="vm.loadMovies()" infinite-scroll-disabled="vm.loading" infinite-scroll-use-document-bottom="true">
+<section id="movies"
+  infinite-scroll="vm.load()"
+  infinite-scroll-disabled="vm.loading"
+  infinite-scroll-use-document-bottom="true"
+>
 
   <article class="movie" ng-repeat="movie in vm.movies" ng-click="vm.show(movie)">
     <div class="poster no-poster bg-color-{{$index%5+1}}" ng-hide="movie.poster">

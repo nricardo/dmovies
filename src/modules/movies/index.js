@@ -37,7 +37,7 @@ class MoviesController {
     this.tmdbService = $injector.get('tmdbService');
 
     // init movie collection
-    this.movies = [];
+    this.movies = {};
 
     // start things up!
     this.init();
@@ -45,27 +45,50 @@ class MoviesController {
 
   init() {
     // init 
-    this.offset = 0;
-    this.itemsToLoad = 10;
+    this.offset = 0;    
     this.loading = false;
 
     // setup firebase reference
     this.dbMovies = firebase.database().ref('movies');
   }
 
-  loadMovies() {
+  load() {
+    // signal flag that we're going to load data 
     this.loading = true;
-    let ref = this.dbMovies.startAt(null, ''+this.offset).limitToFirst(this.itemsToLoad);
-    ref.on('value', (snapshot) => {
-      let data = snapshot.exists() ? snapshot.exportVal() : {};
-      let values = Object.values(data);
-      let movies = [].concat(this.movies, values);
-      this.$timeout(() => {
-        this.movies = movies;
-        this.offset += values.length;
-        this.loading = false;
-      });      
+
+    // point db reference to next item location
+    let ref = this.dbMovies
+      .startAt(null, ''+this.offset)
+      .limitToFirst(MoviesController.ITEMS);
+
+    // act when data arrives 
+    ref.once('value').then(snapshot => {
+      console.log('load...')
+      // update the list and
+      // calculate next item's offset
+      this.offset += this.update(snapshot);
+
+      // tell Angular that something changed
+      this.$timeout(() => this.loading = false);
     });
+
+    ref.on('value', (snapshot) => {
+      if (this.loading) return;
+      this.update(snapshot);
+      this.$timeout();
+    });
+  }
+
+  update(snapshot) {
+    console.log('update...')
+    // get movies from this snapshot
+    let movies = snapshot.exists() ? snapshot.exportVal() : {};
+
+    // (re)build complete collection of movies
+    for (var key in movies) this.movies[key] = movies[key];
+
+    // send number of items updated
+    return Object.keys(movies).length || 0;
   }
 
   show(movie) {
@@ -129,3 +152,5 @@ class MoviesController {
     });
   }
 }
+
+MoviesController.ITEMS = 20;

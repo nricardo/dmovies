@@ -39,3 +39,12 @@ footer {
     margin: auto;
   }
 }
+
+.alert {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: 5px;
+  padding: 5px;
+}

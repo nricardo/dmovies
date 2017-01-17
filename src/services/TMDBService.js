@@ -37,6 +37,47 @@ class TMDBService
     });
   }
 
+  getConfig(param:String) {
+    param = param || null;
+    param = param.split('.');
+
+    // find config value
+    let config = param.reduce((a, p) => a[p], this.config);
+
+    // get config data
+    return param ? config : this.config;    
+  }
+  
+  // scrapes a movie
+  scrape(movie):Promise {
+    // scrape movie metadata
+    return this.tmdbService.search('movie', movie.title, {year: movie.year}).then(result => {
+      console.log('scraped movie: ', movie.title, result);
+
+      // check if there's any match
+      if (result.length === 0) return null;
+
+      // filter by language ('en')
+      result = result.filter(m => m.original_language === 'en');
+
+      // just assume the first entry as our movie
+      let metadata = result[0];
+
+      // get only the needed info
+      metadata = {
+        id:       metadata.id,
+        title:    metadata.original_title,
+        date:     metadata.release_date,
+        tagline:  metadata.tagline || '',
+        overview: metadata.overview,
+        poster:   metadata.poster_path,
+        fanart:   metadata.backdrop_path,
+      };
+
+      return metadata;
+    });
+  }
+
   search(entity, query, options) {
     // check passed options
     options = options || {};
@@ -55,15 +96,6 @@ class TMDBService
         (response, status, headers, config) => response.data.results
       );
     });
-  }
-
-  getBackdropUrl(path) {
-    return "".concat(this.config.images.base_url, "w150", path);
-  }
-
-  getPosterUrl(path) {
-    // for now the same as backdrop..
-    return this.getBackdropUrl(path);
   }
 }
 

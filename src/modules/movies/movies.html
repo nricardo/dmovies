@@ -1,21 +1,20 @@
 <div class="page_header">
   <h1>
-    Movies Collection<br/>
-    <small class="muted">Search, view or edit details info and mark your favorite ones!</small>
+    Movie Collection <small class="muted">Manage all your movies in one single neat place!</small>
   </h1>
 </div>
 
-<div uib-alert class="alert alert-info alert-dismissible" role="alert" ng-show="vm.moviesNotScrapped > 0">
+<div uib-alert class="alert alert-info alert-dismissible" role="alert" ng-show="vm.unScrappedMovies > 0">
   <span class="pull-right">
-    <button class="btn btn-sm btn-default" role="button" ng-click="vm.scrapeAll()">Scrape</button>
+    <button class="btn btn-sm btn-default" role="button" ng-click="vm.scrape()">(Re) scrape...</button>
   </span>
-  There's <span class="badge" ng-bind="vm.moviesNotScrapped"></span> movies without metadata information!
+  There's <span class="badge" ng-bind="vm.unScrappedMovies"></span> movies without metadata information!
 </div>
 
 <section id="movies"
   infinite-scroll="vm.load()"
-  infinite-scroll-disabled="vm.loading"
   infinite-scroll-use-document-bottom="true"
+  infinite-scroll-disabled="vm.loading || vm.done"
 >
 
   <article class="movie" ng-repeat="movie in vm.movies" ng-click="vm.show(movie)">
@@ -23,7 +22,7 @@
       <span ng-bind="movie.title.charAt(0) | uppercase"></span>
     </div>
 
-    <img class="poster" ng-src="{{movie.poster}}" ng-if="movie.poster">
+    <img class="poster" ng-src="{{vm.getPosterUrl(movie.poster)}}" ng-if="movie.poster">
 
     <h5 class="title">
       <span ng-bind="movie.title"></span>&nbsp;

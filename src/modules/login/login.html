@@ -1,0 +1,9 @@
+<h1>Login</h1>
+
+<form class="container">
+  <input class="form-control" type="text" ng-model="credentials.username" placeholder="Username" autofocus>
+  <input class="form-control" type="password" ng-model="credentials.password" placeholder="Password" autofocus>
+  <button type="submit" class="btn btn-primary" ng-click="vm.login(credentials)">
+    <span class="fa fa-sign-in"></span> Sign-in
+  </button>
+</form>

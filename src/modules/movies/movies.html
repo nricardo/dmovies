@@ -17,7 +17,7 @@
   infinite-scroll-disabled="vm.loading || vm.done"
 >
 
-  <article class="movie" ng-repeat="movie in vm.movies" ng-click="vm.show(movie)">
+  <article class="movie" ng-repeat="(key, movie) in vm.movies" ng-click="vm.show(key)">
     <div class="poster no-poster bg-color-{{$index%5+1}}" ng-hide="movie.poster">
       <span ng-bind="movie.title.charAt(0) | uppercase"></span>
     </div>

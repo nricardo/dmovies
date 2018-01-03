@@ -1,12 +1,19 @@
-'use strict';
-
 // import external modules
-import {Controller, State, SetModule} from 'angular2-now';
+import {State, SetModule} from 'ng2now';
 
 // define this module
-export default SetModule('dMovies.home', []).name;
+SetModule('dMovies.home', []);
 
-@Controller({name: 'homeController'})
-@State({ name: 'home', url: '/', defaultRoute: true, template: require('./home.html') })
-
+@State({
+  url: '/home',
+  name: 'home',
+  otherwise: true,
+  controllerAs: 'vm',
+  controller: HomeController,
+  template: require('./home.html'),
+  // resolve: {
+  //   user: ($q, $timeout, $state, authService) =>
+  //     authService.getUser().catch(() => $timeout(() => $state.go('login')))
+  // }
+})
 class HomeController {}

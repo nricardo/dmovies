@@ -1,11 +1,15 @@
 {
   "name": "dmovies",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "A movie organizer for KODI (aka XBMC).",
   "main": "index.js",
   "scripts": {
-    "predev": "npm install",
-    "dev": "webpack-dev-server -w --content-base public/"
+    "predev": "yarn install",
+    "prebuild": "yarn install",
+    "preserve": "yarn run build",
+    "build": "webpack --colors --progress -p",
+    "serve": "http-server dist/",
+    "dev": "webpack-dev-server --colors --inline --hot --content-base dist/"
   },
   "author": "Nelson Ricardo <nelson.s.ricardo@gmail.com>",
   "repository": {
@@ -14,26 +18,32 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "angular-ui-router": "^0.2.18",
-    "angular2-now": "^1.1.6",
-    "babel-core": "^5.8.25",
-    "babel-loader": "^5.3.2",
-    "bluebird": "^3.4.5",
-    "bootstrap-sass": "^3.3.5",
-    "bottleneck": "^1.12.0",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-plugin-transform-decorators-legacy": "^1.3.4",
+    "babel-preset-env": "^1.6.0",
+    "copy-webpack-plugin": "^4.0.1",
     "css-loader": "^0.19.0",
     "file-loader": "^0.8.4",
     "html-loader": "^0.3.0",
+    "html-webpack-plugin": "^2.30.1",
+    "http-server": "^0.9.0",
     "json-loader": "^0.5.3",
-    "node-sass": "^3.3.3",
-    "sass-loader": "^3.0.0",
+    "node-sass": "^4.7.2",
+    "sass-loader": "^6.0.6",
     "style-loader": "^0.12.4",
     "url-loader": "^0.5.6",
-    "webpack": "^1.12.2",
-    "webpack-dev-server": "^1.12.0"
+    "webpack": "^3.6.0",
+    "webpack-dev-server": "^2.8.2"
   },
   "dependencies": {
+    "@uirouter/angularjs": "^1.0.12",
+    "angular": "^1.6.6",
+    "bootstrap-sass": "^3.3.7",
+    "bottleneck": "^1.16.0",
+    "firebase": "^4.8.1",
     "ng-infinite-scroll": "^1.3.0",
+    "ng2now": "^0.0.17",
     "rxjs": "^5.0.1"
   }
 }

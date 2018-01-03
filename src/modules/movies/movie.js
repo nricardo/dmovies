@@ -1,6 +1,3 @@
-'use strict';
-
-import uirouter from 'angular-ui-router';
 import {Component, Inject, State, SetModule} from 'angular2-now';
 
 import {TMDBService} from 'services/TMDBService';

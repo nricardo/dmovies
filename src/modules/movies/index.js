@@ -1,18 +1,14 @@
-'use strict';
-
 // import external modules
-import Observable from 'rxjs/Observable';
+import {Observable} from 'rxjs/Observable';
 import infiniteScroll from 'ng-infinite-scroll';
-import {Controller, Inject, State, SetModule} from 'angular2-now';
+import {Inject, State, SetModule} from 'ng2now';
 
-// load services
-import {TMDBService} from 'services/TMDBService';
-
-export default SetModule('dMovies.movies', [infiniteScroll])
+SetModule('dMovies.movies', [infiniteScroll])
 .config(($stateProvider) => {
   $stateProvider
   .state('movies', {
     url: '/movies',
+    abstract: true,
     template: '<ui-view />',
     controllerAs: 'vm',
     controller: MoviesController,
@@ -20,21 +16,16 @@ export default SetModule('dMovies.movies', [infiniteScroll])
   })
   .state('movies.list', {url: '/', template: require('./movies.html')})
   .state('movies.item', {url: '/{id}', template: require('./movie.html')});
-})
-.name;
+});
 
-@Inject(['$scope', '$injector'])
-@Controller({name: 'moviesController'})
+@Inject(['$injector'])
 class MoviesController {
-  movies:Object;
-  tmdbService:TMDBService;
-
-  constructor ($scope, $injector) {
-    this.$scope = $scope;
+  constructor ($injector) {
     this.$q = $injector.get('$q');
     this.$state = $injector.get('$state');
     this.$params = $injector.get('$stateParams');
     this.$timeout = $injector.get('$timeout');
+    this.dbService = $injector.get('dbService');
     this.tmdbService = $injector.get('tmdbService');
 
     // start things up!
@@ -44,33 +35,31 @@ class MoviesController {
   init() {
     // init
     this.done = false;
-    this.offset = null;    
+    this.offset = null;
     this.loading = false;
 
     // init collection
     this.movies = {};
 
     // setup firebase reference
-    this.dbMovies = firebase.database().ref('movies').limitToFirst(MoviesController.ITEMS + 1);
-
-    // react each time we get an event from firebase
+    this.dbMovies = this.dbService.getDatabase().ref('movies');
   }
 
-  fetch():Observable {
-    const ref = this.offset ? this.dbMovies.startAt(null, this.offset) : this.dbMovies;
+  fetch() {
+    const ref = this.offset ? this.dbMovies.startAt(null, this.offset) : this.dbMovies.limitToFirst(MoviesController.ITEMS + 1);
     return Observable.create(observer => {
       ref.once('value', snapshot => {
         snapshot.forEach(item => observer.next({
           key: item.key,
           value: item.val()
-        }));        
+        }));
         observer.complete();
       });
     });
   }
 
   load() {
-    // signal flag that we're going to load data 
+    // signal flag that we're going to load data
     this.loading = true;
 
     // act when data arrives
@@ -92,17 +81,15 @@ class MoviesController {
     });
   }
 
-  show(movie) {
-    // get movie id
-    let id = movie.id || 0;
-
+  show(key) {
+    console.log(key)
     // get a DB reference for this movie
-    this.dbMovie = this.dbMovies.child(id);
+    this.dbMovie = this.dbMovies.child(key);
 
     // read stored data
     this.dbMovie.on('value', data => {
       this.movie = data.val();
-      this.$state.go('movies.item', {id: id});
+      this.$state.go('movies.item', {id: key});
     });
   }
 

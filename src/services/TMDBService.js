@@ -1,19 +1,19 @@
 /**
-  * The Movie Database REST Service
-  * @author: Nelson Ricardo
-  * @description: AngularJS service using $resource for TMDB REST api v3
-  *
-  **/
+ * The Movie Database REST Service
+ * @author: Nelson Ricardo
+ * @description: AngularJS service using $resource for TMDB REST api v3
+ */
 
-'use strict';
-
-import {Inject, Service} from 'angular2-now';
-
+// import external modules
 import Bottleneck from 'bottleneck';
+import {Inject, Service, SetModule} from 'ng2now';
+
+// define this module
+SetModule('dMovies.tmdbService', []);
 
 @Inject(['$q', '$http'])
 @Service('tmdbService')
-class TMDBService
+export class TMDBService
 {
   constructor ($q, $http) {
     this.$q = $q;
@@ -28,16 +28,22 @@ class TMDBService
     this.config().then(response => this.config = response.data);
   }
 
-  config() {
-    // get configuration data
-    return this.$http({
-      method: 'GET',
-      url: this.url + '/configuration',
-      params: { api_key: this.key }
-    });
+  fetch(url, params) {
+    params = params || {};
   }
 
-  getConfig(param:String) {
+  config() {
+    // setup URL for config
+    let url = this.url + '/configuration';
+
+    // and its params...
+    let params = { api_key: this.key };
+
+    // get configuration data
+    return this.$http.get(url, { params: params });
+  }
+
+  getConfig(param) {
     param = param || null;
     param = param.split('.');
 
@@ -45,11 +51,11 @@ class TMDBService
     let config = param.reduce((a, p) => a[p], this.config);
 
     // get config data
-    return param ? config : this.config;    
+    return param ? config : this.config;
   }
-  
+
   // scrapes a movie
-  scrape(movie):Promise {
+  scrape(movie) {
     // scrape movie metadata
     return this.tmdbService.search('movie', movie.title, {year: movie.year}).then(result => {
       console.log('scraped movie: ', movie.title, result);
@@ -101,7 +107,5 @@ class TMDBService
 
 TMDBService.LIMIT = 40; // limit of API requests
 TMDBService.INTERVAL = 10000; // 10sec between max. requests
-TMDBService.API_URL = 'http://api.themoviedb.org/3';
-TMDBService.API_KEY = 'f7f51775877e0bb6703520952b3c7840';
-
-export default TMDBService;
+TMDBService.API_URL = 'https://api.themoviedb.org/3';
+TMDBService.API_KEY = 'ecbc86c92da237cb9faff6d3ddc4be6d';

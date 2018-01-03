@@ -1,31 +1,34 @@
-'use strict';
+// import UI Router
+import '@uirouter/angularjs';
 
 // import external modules
-import uirouter from 'angular-ui-router';
-import {Component, View, SetModule} from 'angular2-now';
+import {Component, Inject, SetModule} from 'ng2now';
+
+// import app's services
+import '../services/AuthService';
+import '../services/DBService';
+import '../services/TMDBService';
 
 // import our own modules
-import home from 'home';
-import movies from 'movies';
+import '../modules/home';
+import '../modules/login';
+import '../modules/movies';
 
 // define this module
-export default SetModule('d-movies', ['ui.bootstrap', uirouter, home, movies]).name;
+SetModule('d-movies', ['ui.router', 'dMovies.authService', 'dMovies.dbService', 'dMovies.tmdbService', 'dMovies.home', 'dMovies.movies'])
+.run($rootScope => {
+  $rootScope.$on('$stateChangeStart', (event, state) => {
+    console.log(event, state);
+  });
+});
 
-@Component({ selector: 'd-movies' })
-@View({ template: '<ui-view></ui-view>'})
-
+@Component({
+  selector: 'd-movies',
+  template: '<ui-view />',
+  style: require('./d-movies.scss'),
+})
 export class dMovies {
-  constructor ($injector) {
+  constructor () {
     console.info('dMovies starting...');
-
-    // Initialize Firebase
-    var config = {
-      apiKey: "AIzaSyBsSEff7YV38mHii3l1R92BYQibA6EPbws",
-      authDomain: "dmovies.firebaseapp.com",
-      databaseURL: "https://dmovies.firebaseio.com",
-      storageBucket: "firebase-dmovies.appspot.com",
-    };
-
-    firebase.initializeApp(config);
   }
 }

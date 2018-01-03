@@ -1,12 +1,12 @@
 // -- define app's theme
-@import 'slate';
+@import '~assets/stylesheets/slate';
 
 // -- import Bootstrap framework
-@import 'bootstrap';
+@import '~assets/stylesheets/bootstrap';
 
 // -- app's styles goes here...
 body {
-  background-image: url(images/bg.png);
+  background-image: url(../assets/images/bg.png);
   color: #fff;
   display: flex;
   flex-direction: column;
